@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: int_customer_activity
+    description: One row per customer with a summary of their (synthetic) billing. Intermediate model, feeds the gold churn mart.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: months_billed
+        description: Number of billing rows. 0 for customers with tenure 0.
+        tests: [not_null]
+      - name: total_billed
+        description: Sum of billing amounts. Should equal total_charges.
+        tests: [not_null]

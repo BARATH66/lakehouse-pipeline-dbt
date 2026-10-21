@@ -1,0 +1,4 @@
+relationship 3f7a9c15-2b64-4d80-a1e3-5c9b7d2f4e61
+	fromColumn: FactCustomerChurn.customer_id
+	toColumn: DimCustomer.customer_id
+

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_billing
+    description: One row per customer per billing month. SYNTHETIC, derived from tenure and TotalCharges.
+    columns:
+      - name: billing_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: amount
+        tests: [not_null]

@@ -1,0 +1,14 @@
+name: lakehouse_lab
+version: "0.1.0"
+profile: lakehouse_lab
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+models:
+  lakehouse_lab:
+    silver:
+      +schema: silver
+      +materialized: table
+    gold:
+      +schema: gold
+      +materialized: table

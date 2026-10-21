@@ -1,0 +1,10 @@
+expression ServerName = "localhost" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 4c0e2b7a-1d53-4e8f-9a60-b3c1d5e7f801
+
+	annotation PBI_ResultType = Text
+
+expression DatabaseName = "lakehouse_lab" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 6a2d4f9c-3b71-4c05-8e12-d7f9a1b3c502
+
+	annotation PBI_ResultType = Text
+

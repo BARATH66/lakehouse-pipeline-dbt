@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: One row per Telco customer, typed and cleaned from bronze.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: tenure_months
+        tests: [not_null]
+      - name: contract_type
+        tests:
+          - accepted_values:
+              values: ['Month-to-month', 'One year', 'Two year']
+      - name: is_churned
+        tests:
+          - accepted_values:
+              values: [0, 1]
+              quote: false
+      - name: total_charges
+        description: NULL for 11 customers with tenure 0 (blank in the source).
+        tests:
+          - not_null:
+              config:
+                severity: warn

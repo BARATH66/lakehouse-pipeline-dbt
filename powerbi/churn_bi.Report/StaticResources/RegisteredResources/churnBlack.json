@@ -1,0 +1,86 @@
+{
+  "name": "Churn Black",
+  "dataColors": [
+    "#7C3AED",
+    "#2EC4B6",
+    "#FFBF69",
+    "#4CC9F0",
+    "#F15BB5",
+    "#80ED99",
+    "#FF6B35",
+    "#E63946"
+  ],
+  "background": "#181818",
+  "foreground": "#FFFFFF",
+  "tableAccent": "#7C3AED",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#181818"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#A0A0A0"
+              }
+            },
+            "fontFamily": "Segoe UI Semibold",
+            "fontSize": 10
+          }
+        ],
+        "categoryAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#A0A0A0"
+              }
+            }
+          }
+        ],
+        "valueAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#A0A0A0"
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": "#262626"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#A0A0A0"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

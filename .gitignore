@@ -1,0 +1,18 @@
+# secrets and local config
+.env
+.user.yml
+
+# local generator and loader scripts, and local data (kept off GitHub on purpose)
+scripts/
+data/
+parked/
+
+# build output and logs
+logs/
+target/
+dbt_packages/
+__pycache__/
+
+# Power BI Desktop local cache and settings
+.pbi/
+*.abf

@@ -1,0 +1,177 @@
+table FactCustomerChurn
+	lineageTag: a1b2c3d4-0002-4a5b-8c6d-7e8f9a0b1c02
+
+	measure Customers = COUNTROWS(FactCustomerChurn)
+		formatString: #,0
+		displayFolder: Descriptive
+		lineageTag: a02c8b0a-fa05-4b64-a03f-94c41d27a669
+
+	measure 'Active Customers' = SUM(FactCustomerChurn[is_active])
+		formatString: #,0
+		displayFolder: Descriptive
+		lineageTag: 61844b42-ceaa-4d0a-94cf-69385d3a4751
+
+	measure 'Churned Customers' = SUM(FactCustomerChurn[is_churned])
+		formatString: #,0
+		displayFolder: Descriptive
+		lineageTag: cd23bc29-e9bd-488e-b51b-c5c3f7a18a99
+
+	measure 'Churn Rate' = DIVIDE([Churned Customers], [Customers])
+		formatString: 0.0%
+		displayFolder: Descriptive
+		lineageTag: 36c4082a-495b-4844-bd68-cf3836702a6e
+
+	measure 'Total LTV' = SUM(FactCustomerChurn[ltv])
+		formatString: #,0
+		displayFolder: Descriptive
+		lineageTag: ebde1a96-a0bb-4746-8afb-b6870b8424d4
+
+	measure 'Avg LTV' = DIVIDE([Total LTV], [Customers])
+		formatString: #,0.00
+		displayFolder: Descriptive
+		lineageTag: fa63edbf-9d6a-4ac4-ad77-2992d9c4750e
+
+	measure 'Avg Monthly Charges' = AVERAGE(FactCustomerChurn[monthly_charges])
+		formatString: #,0.00
+		displayFolder: Descriptive
+		lineageTag: 42605074-55e1-4cad-8c9f-d52c43a65ac6
+
+	measure 'Avg Tenure (months)' = AVERAGE(FactCustomerChurn[tenure_months])
+		formatString: 0.0
+		displayFolder: Descriptive
+		lineageTag: 41b926c1-0076-480e-9717-9aad86a8f2b7
+
+	/// Monthly recurring revenue from customers who have not churned.
+	measure 'MRR Active' = CALCULATE(SUM(FactCustomerChurn[monthly_charges]), FactCustomerChurn[is_active] = 1)
+		formatString: #,0
+		displayFolder: Descriptive
+		lineageTag: 1069fe2e-5067-43f3-8287-96d477d25816
+
+	/// Monthly recurring revenue that left with churned customers.
+	measure 'MRR Lost' = CALCULATE(SUM(FactCustomerChurn[monthly_charges]), FactCustomerChurn[is_churned] = 1)
+		formatString: #,0
+		displayFolder: Descriptive
+		lineageTag: 837ecc5c-9217-4c9d-b7fb-8278ac67cc73
+
+	measure 'Overall Churn Rate' = CALCULATE([Churn Rate], REMOVEFILTERS())
+		formatString: 0.0%
+		displayFolder: Diagnostic
+		lineageTag: 01aa544e-14be-4676-b2ce-2fa914b8b305
+
+	/// How far a segment's churn rate is above or below the overall rate.
+	measure 'Churn Rate Gap (pts)' = [Churn Rate] - [Overall Churn Rate]
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Diagnostic
+		lineageTag: b79ada81-1640-44bc-946d-ed719830f003
+
+	/// Share of all churned customers that fall in the current segment.
+	measure 'Share of Churners' = DIVIDE([Churned Customers], CALCULATE([Churned Customers], REMOVEFILTERS()))
+		formatString: 0.0%
+		displayFolder: Diagnostic
+		lineageTag: a6abf6de-445f-47f0-a9c8-5a0eb6416646
+
+	column customer_id
+		dataType: string
+		isHidden
+		lineageTag: 15e48082-2283-4127-b368-696a5d9fa7d0
+		summarizeBy: none
+		sourceColumn: customer_id
+
+	column contract_type
+		dataType: string
+		lineageTag: e6586336-2076-41ab-a930-412bf2d1fbff
+		summarizeBy: none
+		sourceColumn: contract_type
+
+	column internet_service
+		dataType: string
+		lineageTag: 04b1227d-fce6-4d6e-8205-eea4abfa42ed
+		summarizeBy: none
+		sourceColumn: internet_service
+
+	column payment_method
+		dataType: string
+		lineageTag: 1f2f4e56-e9d1-4cab-be8c-98b1b64b9105
+		summarizeBy: none
+		sourceColumn: payment_method
+
+	column tenure_months
+		dataType: int64
+		formatString: 0
+		lineageTag: 59971ed2-51e9-4bb5-9fdf-3f2be0eca993
+		summarizeBy: none
+		sourceColumn: tenure_months
+
+	column tenure_band
+		dataType: string
+		lineageTag: ba2d277c-f2e6-4382-8197-4d14448efd42
+		summarizeBy: none
+		sourceColumn: tenure_band
+		sortByColumn: tenure_band_order
+
+	column tenure_band_order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c4a62c2e-96fd-470a-95b2-2c26be3c352f
+		summarizeBy: none
+		sourceColumn: tenure_band_order
+
+	column monthly_charges
+		dataType: decimal
+		formatString: #,0.00
+		lineageTag: 25307372-6c32-47ae-aa46-2914e8b3ef1a
+		summarizeBy: none
+		sourceColumn: monthly_charges
+
+	column total_charges
+		dataType: decimal
+		formatString: #,0.00
+		lineageTag: 37de867e-b55b-49d5-94fa-e17337225fe2
+		summarizeBy: none
+		sourceColumn: total_charges
+
+	column months_billed
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c9e86f-c9aa-4775-86dc-606830cd99db
+		summarizeBy: none
+		sourceColumn: months_billed
+
+	column ltv
+		dataType: decimal
+		formatString: #,0.00
+		lineageTag: 3cfdb13b-d50c-4bb1-9ffd-9d5c41053c20
+		summarizeBy: none
+		sourceColumn: ltv
+
+	column is_churned
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 65f3da98-615e-4b2e-a188-3fec56e45872
+		summarizeBy: none
+		sourceColumn: is_churned
+
+	column is_active
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1365edca-f104-401e-8f53-454882a3b960
+		summarizeBy: none
+		sourceColumn: is_active
+
+	partition FactCustomerChurn = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName),
+				    Gold = Source{[Schema = "gold", Item = "fct_customer_churn"]}[Data],
+				    Selected = Table.SelectColumns(Gold, {"customer_id", "contract_type", "internet_service", "payment_method", "tenure_months", "tenure_band", "monthly_charges", "total_charges", "months_billed", "ltv", "is_churned", "is_active"}),
+				    Typed = Table.TransformColumnTypes(Selected, {{"customer_id", type text}, {"contract_type", type text}, {"internet_service", type text}, {"payment_method", type text}, {"tenure_months", Int64.Type}, {"tenure_band", type text}, {"monthly_charges", Currency.Type}, {"total_charges", Currency.Type}, {"months_billed", Int64.Type}, {"ltv", Currency.Type}, {"is_churned", Int64.Type}, {"is_active", Int64.Type}}),
+				    WithOrder = Table.AddColumn(Typed, "tenure_band_order", each if [tenure_months] <= 12 then 1 else if [tenure_months] <= 24 then 2 else if [tenure_months] <= 48 then 3 else 4, Int64.Type)
+				in
+				    WithOrder
+
+	annotation PBI_ResultType = Table
+

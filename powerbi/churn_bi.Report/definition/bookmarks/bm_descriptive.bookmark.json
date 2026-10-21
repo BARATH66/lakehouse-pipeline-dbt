@@ -1,0 +1,129 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Descriptive",
+  "name": "bm_descriptive",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "aeccd83c9f7e8e516d15",
+      "cec60ef4410b52c66436",
+      "8ebc8bdc789d328eadd4",
+      "493be3875e36481970c0",
+      "0a100186514d030dc87d",
+      "cc9d079637399bc85b9a",
+      "debb905328b6f4cedd9d",
+      "57ce3ee4868d3424cc76",
+      "da20045e4f62c7ceee2c",
+      "73166777d62e2b827d76",
+      "fa6acc5c816b2b2252a8",
+      "8b9c2e4de7072d331fe1",
+      "52f9083c9b60e7232e19",
+      "68967022f1202b4b1a5c",
+      "f9a89f036a9a3b8549d6"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.0",
+    "activeSection": "analytics",
+    "sections": {
+      "analytics": {
+        "visualContainers": {
+          "aeccd83c9f7e8e516d15": {
+            "singleVisual": {
+              "visualType": "card"
+            }
+          },
+          "cec60ef4410b52c66436": {
+            "singleVisual": {
+              "visualType": "card"
+            }
+          },
+          "8ebc8bdc789d328eadd4": {
+            "singleVisual": {
+              "visualType": "card"
+            }
+          },
+          "493be3875e36481970c0": {
+            "singleVisual": {
+              "visualType": "card"
+            }
+          },
+          "0a100186514d030dc87d": {
+            "singleVisual": {
+              "visualType": "card"
+            }
+          },
+          "cc9d079637399bc85b9a": {
+            "singleVisual": {
+              "visualType": "barChart"
+            }
+          },
+          "debb905328b6f4cedd9d": {
+            "singleVisual": {
+              "visualType": "columnChart"
+            }
+          },
+          "57ce3ee4868d3424cc76": {
+            "singleVisual": {
+              "visualType": "barChart",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "da20045e4f62c7ceee2c": {
+            "singleVisual": {
+              "visualType": "barChart",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "73166777d62e2b827d76": {
+            "singleVisual": {
+              "visualType": "barChart",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "fa6acc5c816b2b2252a8": {
+            "singleVisual": {
+              "visualType": "tableEx",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "8b9c2e4de7072d331fe1": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "52f9083c9b60e7232e19": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          },
+          "68967022f1202b4b1a5c": {
+            "singleVisual": {
+              "visualType": "actionButton"
+            }
+          },
+          "f9a89f036a9a3b8549d6": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

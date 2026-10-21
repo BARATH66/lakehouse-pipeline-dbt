@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: bronze
+    schema: bronze
+    description: Raw data loaded unchanged by the load scripts.
+    tables:
+      - name: telco_customers
+        description: Telco customer churn CSV (Kaggle blastchar), every column as text.
+      - name: telco_billing
+        description: SYNTHETIC monthly billing derived from tenure and TotalCharges.

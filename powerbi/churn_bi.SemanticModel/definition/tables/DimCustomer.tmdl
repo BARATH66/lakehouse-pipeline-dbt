@@ -1,0 +1,106 @@
+table DimCustomer
+	lineageTag: a1b2c3d4-0001-4a5b-8c6d-7e8f9a0b1c01
+
+	column customer_id
+		dataType: string
+		isHidden
+		lineageTag: 59133604-e0c6-4353-9c47-b884714ae6b3
+		summarizeBy: none
+		sourceColumn: customer_id
+
+	column gender
+		dataType: string
+		lineageTag: cf528953-2223-4329-864f-cc6bd36841d6
+		summarizeBy: none
+		sourceColumn: gender
+
+	column is_senior_citizen
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e6fe292a-5004-4659-ba49-427f3390cac9
+		summarizeBy: none
+		sourceColumn: is_senior_citizen
+
+	column has_partner
+		dataType: int64
+		formatString: 0
+		lineageTag: 470c4ca6-3fc1-4d37-883e-98daab0b9dce
+		summarizeBy: none
+		sourceColumn: has_partner
+
+	column has_dependents
+		dataType: int64
+		formatString: 0
+		lineageTag: 055434ac-e136-4038-9bdd-179a2f941dcb
+		summarizeBy: none
+		sourceColumn: has_dependents
+
+	column has_phone_service
+		dataType: int64
+		formatString: 0
+		lineageTag: 9fe3d6bc-a195-4a02-96e6-8f78a80d2395
+		summarizeBy: none
+		sourceColumn: has_phone_service
+
+	column multiple_lines
+		dataType: string
+		lineageTag: 4c70accf-32e0-4907-adf6-39db1a7511e6
+		summarizeBy: none
+		sourceColumn: multiple_lines
+
+	column online_security
+		dataType: string
+		lineageTag: 4fc9194f-fb78-4350-a9dd-a326af309c1b
+		summarizeBy: none
+		sourceColumn: online_security
+
+	column online_backup
+		dataType: string
+		lineageTag: b4521387-c32a-4b75-8d0f-be27c5e68c79
+		summarizeBy: none
+		sourceColumn: online_backup
+
+	column device_protection
+		dataType: string
+		lineageTag: e30d26c7-db64-4840-b7fd-32843bd678f2
+		summarizeBy: none
+		sourceColumn: device_protection
+
+	column tech_support
+		dataType: string
+		lineageTag: 60a8f221-73b0-4ef9-99cc-9cad3180ca58
+		summarizeBy: none
+		sourceColumn: tech_support
+
+	column streaming_tv
+		dataType: string
+		lineageTag: 070f9c01-3190-43b8-aaab-d4c96bcd3b86
+		summarizeBy: none
+		sourceColumn: streaming_tv
+
+	column streaming_movies
+		dataType: string
+		lineageTag: ef29613e-7382-4c26-8489-810342f5c04a
+		summarizeBy: none
+		sourceColumn: streaming_movies
+
+	column is_paperless_billing
+		dataType: int64
+		formatString: 0
+		lineageTag: a5600434-b7ba-4f77-8eb8-e18dd7dd314c
+		summarizeBy: none
+		sourceColumn: is_paperless_billing
+
+	partition DimCustomer = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName),
+				    Gold = Source{[Schema = "gold", Item = "dim_customer"]}[Data],
+				    Selected = Table.SelectColumns(Gold, {"customer_id", "gender", "is_senior_citizen", "has_partner", "has_dependents", "has_phone_service", "multiple_lines", "online_security", "online_backup", "device_protection", "tech_support", "streaming_tv", "streaming_movies", "is_paperless_billing"}),
+				    Typed = Table.TransformColumnTypes(Selected, {{"customer_id", type text}, {"gender", type text}, {"is_senior_citizen", type logical}, {"has_partner", Int64.Type}, {"has_dependents", Int64.Type}, {"has_phone_service", Int64.Type}, {"multiple_lines", type text}, {"online_security", type text}, {"online_backup", type text}, {"device_protection", type text}, {"tech_support", type text}, {"streaming_tv", type text}, {"streaming_movies", type text}, {"is_paperless_billing", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

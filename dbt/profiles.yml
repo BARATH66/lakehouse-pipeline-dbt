@@ -1,0 +1,15 @@
+lakehouse_lab:
+  target: sqlserver
+  outputs:
+    sqlserver:
+      type: sqlserver
+      driver: "ODBC Driver 18 for SQL Server"
+      server: "{{ env_var('MSSQL_HOST') }}"
+      port: "{{ env_var('MSSQL_PORT') | as_number }}"
+      database: "{{ env_var('MSSQL_DATABASE') }}"
+      schema: dbo
+      user: "{{ env_var('MSSQL_USER') }}"
+      password: "{{ env_var('MSSQL_PASSWORD') }}"
+      encrypt: true
+      trust_cert: true
+      threads: 4
